@@ -9,12 +9,7 @@
 
   <!-- 🔥 ОБЯЗАТЕЛЬНО ДЛЯ WINWHEEL -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
-
-  <!-- Winwheel -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Winwheel/1.0/Winwheel.min.js"></script>
-
-  <!-- Telegram SDK -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
@@ -24,7 +19,6 @@
   <div class="pointer">▼</div>
 
   <div class="wheel-container">
-    <!-- ⚠ Размер должен совпадать с контейнером -->
     <canvas id="wheel" width="220" height="220"></canvas>
   </div>
 
@@ -33,7 +27,7 @@
     <button id="btn-black" class="btn btn-black">⚫️ СТАВКА НА ЧЁРНОЕ</button>
   </div>
 
-  <div id="result" class="result-screen" style="display:none;">
+  <div id="result" class="result-screen">
     <div id="result-text"></div>
     <button id="play-again">Играть ещё</button>
   </div>
