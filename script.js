@@ -5,6 +5,7 @@
   const resultScreen = document.getElementById("result");
   const resultText = document.getElementById("result-text");
 
+  // Создаем колесо
   const theWheel = new Winwheel({
     canvasId: 'wheel',
     outerRadius: 100,
