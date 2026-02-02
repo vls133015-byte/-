@@ -1,28 +1,34 @@
-﻿const tg = window.Telegram.WebApp;
-tg.expand();
+﻿document.addEventListener("DOMContentLoaded", () => {
+  const tg = window.Telegram?.WebApp;
+  if (tg) tg.expand();
 
-let spinning = false;
+  let spinning = false;
 
-function spin(color) {
-  if (spinning) return;
-  spinning = true;
+  window.spin = function(color) {
+    if (spinning) return;
+    spinning = true;
 
-  const wheel = document.getElementById("wheel");
+    const wheel = document.getElementById("wheel");
+    if (!wheel) {
+      console.error("Колесо не найдено!");
+      spinning = false;
+      return;
+    }
 
-  // случайный угол
-  const rotation = 360 * 5 + Math.floor(Math.random() * 360);
+    // случайный угол
+    const rotation = 360 * 5 + Math.floor(Math.random() * 360);
+    wheel.style.transform = rotate(${rotation}deg);
 
-  wheel.style.transform = rotate(${rotation}deg);
+    setTimeout(() => {
+      const win = Math.random() < 0.5;
 
-  setTimeout(() => {
-    const win = Math.random() < 0.5;
+      // Для теста без Telegram
+      alert(`Вы выбрали ${color}. ${win ? "WIN 💰" : "LOSE ❌"}`);
 
-    tg.sendData(JSON.stringify({
-      game: "roulette",
-      color: color,
-      win: win
-    }));
+      // Если в Telegram Web App:
+      // if (tg) tg.sendData(JSON.stringify({ game: "roulette", color: color, win }));
 
-    spinning = false;
-  }, 2800);
-}
+      spinning = false;
+    }, 2800);
+  };
+});
