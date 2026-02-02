@@ -1,0 +1,24 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #111;
+    color: #fff;
+}
+
+#roulette-container {
+    margin: 20px auto;
+    position: relative;
+}
+
+#buttons button, #play-again {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
+}

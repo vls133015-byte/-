@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Рулетка</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <h2>🎲 Рулетка</h2>
+    <div id="roulette-container">
+        <canvas id="wheel" width="300" height="300"></canvas>
+        <div id="result">Сделайте ставку</div>
+    </div>
+
+    <div id="buttons">
+        <button onclick="placeBet('red')">Красное</button>
+        <button onclick="placeBet('black')">Чёрное</button>
+    </div>
+
+    <button id="play-again" onclick="resetGame()" style="display:none;">Сыграть ещё</button>
+    <script src="script.js"></script>
+</body>
+</html>
