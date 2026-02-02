@@ -85,6 +85,14 @@ body {
   margin: 20px auto;
 }
 
+/* КОНТЕЙНЕР КОЛЕСА */
+.wheel-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 20px auto;
+}
+
 /* КОЛЕСО */
 .wheel {
   width: 100%;
@@ -101,12 +109,7 @@ body {
     red 270deg 315deg,
     black 315deg 360deg
   );
-
-  /* ВАЖНО для вращения */
   transform-origin: 50% 50%;
-  transition: transform 2.8s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-}
-
   transition: transform 2.8s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }
 
@@ -116,4 +119,54 @@ body {
   font-size: 22px;
   color: gold;
   margin-bottom: -10px;
+}
+
+/* ЭКРАН РЕЗУЛЬТАТА */
+.result-screen {
+  display: none;
+  text-align: center;
+  margin-top: 15px;
+}
+
+#result-text {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* WIN */
+.win {
+  color: #00ff00;
+  background: rgba(0,255,0,0.2);
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+/* LOSE */
+.lose {
+  color: #ff0000;
+  background: rgba(255,0,0,0.2);
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px; }
+  100% { box-shadow: 0 0 15px; }
+}
+
+/* КНОПКА "Играть ещё" */
+#play-again {
+  padding: 8px 16px;
+  margin-top: 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: gold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#play-again:hover {
+  transform: scale(1.05);
 }

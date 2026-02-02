@@ -14,6 +14,7 @@
 <body>
 
   <div class="game-card">
+
   <h1 class="title">🎰 ROULETTE</h1>
 
   <!-- СТРЕЛКА -->
@@ -24,14 +25,17 @@
     <div id="wheel" class="wheel"></div>
   </div>
 
-  <!-- КНОПКИ -->
-  <button class="btn btn-red" onclick="spin('red')">
-    🔴 СТАВКА НА КРАСНОЕ
-  </button>
+  <!-- КНОПКИ СТАВОК -->
+  <div class="buttons">
+    <button class="btn btn-red" onclick="spin('red')">🔴 СТАВКА НА КРАСНОЕ</button>
+    <button class="btn btn-black" onclick="spin('black')">⚫ СТАВКА НА ЧЁРНОЕ</button>
+  </div>
 
-  <button class="btn btn-black" onclick="spin('black')">
-    ⚫ СТАВКА НА ЧЁРНОЕ
-  </button>
+  <!-- ЭКРАН РЕЗУЛЬТАТА -->
+  <div id="result" class="result-screen">
+    <div id="result-text"></div>
+    <button id="play-again" onclick="resetGame()">Играть ещё</button>
+  </div>
 
 </div>
 
