@@ -1,24 +1,41 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Рулетка</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+  <title>Roulette</title>
+
+  <!-- ВАЖНО: подключаем стили -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Telegram WebApp -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <h2>🎲 Рулетка</h2>
-    <div id="roulette-container">
-        <canvas id="wheel" width="300" height="300"></canvas>
-        <div id="result">Сделайте ставку</div>
-    </div>
 
-    <div id="buttons">
-        <button onclick="placeBet('red')">Красное</button>
-        <button onclick="placeBet('black')">Чёрное</button>
-    </div>
+  <div class="game-card">
 
-    <button id="play-again" onclick="resetGame()" style="display:none;">Сыграть ещё</button>
-    <script src="script.js"></script>
+  <h1 class="title">🎰 ROULETTE</h1>
+
+  <!-- СТРЕЛКА -->
+  <div class="pointer">▼</div>
+
+  <!-- КОЛЕСО -->
+  <div class="wheel-container">
+    <div id="wheel" class="wheel"></div>
+  </div>
+
+  <!-- КНОПКИ -->
+  <button class="btn btn-red" onclick="spin('red')">
+    🔴 СТАВКА НА КРАСНОЕ
+  </button>
+
+  <button class="btn btn-black" onclick="spin('black')">
+    ⚫ СТАВКА НА ЧЁРНОЕ
+  </button>
+
+</div>
+
+  <!-- логика -->
+  <script src="script.js"></script>
 </body>
 </html>
