@@ -1,82 +1,40 @@
-﻿body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #1b1b1b, #000000);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roulette</title>
 
-.game-card {
-  width: 320px;
-  padding: 24px;
-  border-radius: 18px;
-  text-align: center;
-  background: linear-gradient(145deg, #111, #1a1a1a);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25), inset 0 0 10px rgba(0, 0, 0, 0.9);
-  animation: glow 2.5s infinite;
-}
+  <link rel="stylesheet" href="style.css">
 
-.title {
-  margin-bottom: 20px;
-  color: gold;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-}
+  <!-- Winwheel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Winwheel/1.0/Winwheel.min.js"></script>
+  <!-- Конфигурация колеса -->
+  <script src="wheel-config.js"></script>
+</head>
+<body>
 
-.btn {
-  width: 100%;
-  padding: 14px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-}
+<div class="game-card">
+  <h1 class="title">🎰 ROULETTE</h1>
 
-.btn-red {
-  background: linear-gradient(145deg, #b00000, #ff0000);
-  color: white;
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.5);
-}
+  <div class="pointer">▼</div>
 
-.btn-black {
-  background: linear-gradient(145deg, #222, #000);
-  color: gold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-}
+  <div class="wheel-container">
+    <canvas id="wheel" width="220" height="220"></canvas>
+  </div>
 
-.btn:hover { transform: scale(1.03); }
+  <div class="buttons">
+    <button id="btn-red" class="btn btn-red">🔴 СТАВКА НА КРАСНОЕ</button>
+    <button id="btn-black" class="btn btn-black">⚫️ СТАВКА НА ЧЁРНОЕ</button>
+  </div>
 
-@keyframes glow { 0%{box-shadow:0 0 10px gold;}50%{box-shadow:0 0 20px gold;}100%{box-shadow:0 0 10px gold;} }
+  <div id="result" class="result-screen">
+    <div id="result-text"></div>
+    <button id="play-again">Играть ещё</button>
+  </div>
+</div>
 
-.wheel-container {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  margin: 20px auto;
-}
-
-.pointer { text-align: center; font-size: 22px; color: gold; margin-bottom: -10px; }
-
-.result-screen { display: none; text-align: center; margin-top: 15px; }
-#result-text { font-size: 22px; font-weight: bold; margin-bottom: 10px; padding: 10px; border-radius: 8px; }
-.win { color:#00ff00; background:rgba(0,255,0,0.2); animation: glow 1s ease-in-out infinite alternate; }
-.lose { color:#ff0000; background:rgba(255,0,0,0.2); animation: glow 1s ease-in-out infinite alternate; }
-
-#play-again {
-  padding: 8px 16px;
-  margin-top: 8px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  background-color: gold;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-#play-again:hover { transform: scale(1.05); }
+<script src="script.js"></script>
+</body>
+</html>

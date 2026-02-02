@@ -5,7 +5,6 @@
   const resultScreen = document.getElementById("result");
   const resultText = document.getElementById("result-text");
 
-  // 🎡 Создаем колесо из внешнего файла
   const theWheel = new Winwheel({
     canvasId: 'wheel',
     outerRadius: 100,
@@ -13,7 +12,7 @@
     textFillStyle: 'white',
     lineWidth: 2,
     strokeStyle: 'gold',
-    segments: wheelSegments, // берем сегменты из wheel-config.js
+    segments: wheelSegments,
     animation: {
       type: 'spinToStop',
       duration: 4,
