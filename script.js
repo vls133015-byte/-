@@ -1,53 +1,45 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-  let spinning = false;
-  let betColor = null;
-
+  const wheel = document.getElementById("wheel");
   const resultScreen = document.getElementById("result");
   const resultText = document.getElementById("result-text");
 
-  // Создаем колесо
-  const theWheel = new Winwheel({
-    canvasId: 'wheel',
-    outerRadius: 100,
-    textFontSize: 14,
-    textFillStyle: 'white',
-    lineWidth: 2,
-    strokeStyle: 'gold',
-    segments: wheelSegments,
-    animation: {
-      type: 'spinToStop',
-      duration: 4,
-      spins: 8,
-      callbackFinished: onSpinEnd
-    }
-  });
+  let spinning = false;
+  let betColor = null;
 
-  theWheel.draw();
+  function spinWheel() {
+    const randomDegree = Math.floor(Math.random() * 360);
+    wheel.style.transform = rotate(${randomDegree + 1440}deg); // 4 полных оборота + случайный угол
 
-  function resetWheel() {
-    theWheel.stopAnimation(false);
-    theWheel.rotationAngle = 0;
-    theWheel.draw();
-    spinning = false;
-    betColor = null;
+    // Определяем цвет победителя
+    setTimeout(() => {
+      spinning = false;
+      const normalized = randomDegree % 360;
+      const winningColor = (normalized >= 0 && normalized < 45) ||
+                           (normalized >= 90 && normalized < 135) ||
+                           (normalized >= 180 && normalized < 225) ||
+                           (normalized >= 270 && normalized < 315) ? 'red' : 'black';
+
+      if (!betColor) {
+        resultText.textContent = Выпал ${winningColor.toUpperCase()};
+      } else if (betColor === winningColor) {
+        resultText.textContent = Выпал ${winningColor.toUpperCase()}! WIN 💰;
+        resultText.className = 'win';
+      } else {
+        resultText.textContent = Выпал ${winningColor.toUpperCase()}! LOSE ❌;
+        resultText.className = 'lose';
+      }
+
+      resultScreen.style.display = 'block';
+    }, 4200); // совпадает с transition 4s
   }
 
-  function onSpinEnd() {
+  function resetWheel() {
+    wheel.style.transition = 'none';
+    wheel.style.transform = 'rotate(0deg)';
+    void wheel.offsetWidth; // перезапуск transition
+    wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
     spinning = false;
-    const winningSegment = theWheel.getIndicatedSegment();
-    const winColor = winningSegment.fillStyle === '#ff0000' ? 'red' : 'black';
-
-    if (!betColor) {
-      resultText.textContent = Выпал ${winningSegment.text};
-    } else if (betColor === winColor) {
-      resultText.textContent = Выпал ${winningSegment.text}! WIN 💰;
-      resultText.className = 'win';
-    } else {
-      resultText.textContent = Выпал ${winningSegment.text}! LOSE ❌;
-      resultText.className = 'lose';
-    }
-
-    resultScreen.style.display = 'block';
+    betColor = null;
   }
 
   document.getElementById("btn-red").addEventListener("click", () => {
@@ -55,7 +47,7 @@
     betColor = 'red';
     spinning = true;
     resultScreen.style.display = 'none';
-    theWheel.startAnimation();
+    spinWheel();
   });
 
   document.getElementById("btn-black").addEventListener("click", () => {
@@ -63,7 +55,7 @@
     betColor = 'black';
     spinning = true;
     resultScreen.style.display = 'none';
-    theWheel.startAnimation();
+    spinWheel();
   });
 
   document.getElementById("play-again").addEventListener("click", () => {
