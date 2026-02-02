@@ -2,44 +2,42 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roulette</title>
 
-  <!-- ВАЖНО: подключаем стили -->
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
 
-  <!-- Telegram WebApp -->
+  <!-- Winwheel.js — главное, без него колесо не работает -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Winwheel/1.0/Winwheel.min.js"></script>
+
+  <!-- GSAP — для плавного вращения -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Telegram SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
-  <div class="game-card">
-
+<div class="game-card">
   <h1 class="title">🎰 ROULETTE</h1>
 
-  <!-- СТРЕЛКА -->
   <div class="pointer">▼</div>
 
-  <!-- КОЛЕСО -->
   <div class="wheel-container">
-    <div id="wheel" class="wheel"></div>
+    <canvas id="wheel" width="300" height="300"></canvas>  <!-- ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ -->
   </div>
 
-  <!-- КНОПКИ СТАВОК -->
   <div class="buttons">
-    <button class="btn btn-red" onclick="spin('red')">🔴 СТАВКА НА КРАСНОЕ</button>
-    <button class="btn btn-black" onclick="spin('black')">⚫️ СТАВКА НА ЧЁРНОЕ</button>
+    <button id="btn-red" class="btn btn-red">🔴 СТАВКА НА КРАСНОЕ</button>
+    <button id="btn-black" class="btn btn-black">⚫️ СТАВКА НА ЧЁРНОЕ</button>
   </div>
 
-  <!-- ЭКРАН РЕЗУЛЬТАТА -->
-  <div id="result" class="result-screen">
+  <div id="result" class="result-screen" style="display:none;">
     <div id="result-text"></div>
-    <button id="play-again" onclick="resetGame()">Играть ещё</button>
+    <button id="play-again">Играть ещё</button>
   </div>
-
 </div>
 
-  <!-- логика -->
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
