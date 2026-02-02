@@ -7,11 +7,11 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <!-- Winwheel.js — главное, без него колесо не работает -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Winwheel/1.0/Winwheel.min.js"></script>
+  <!-- 🔥 ОБЯЗАТЕЛЬНО ДЛЯ WINWHEEL -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 
-  <!-- GSAP — для плавного вращения -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <!-- Winwheel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Winwheel/1.0/Winwheel.min.js"></script>
 
   <!-- Telegram SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -24,7 +24,8 @@
   <div class="pointer">▼</div>
 
   <div class="wheel-container">
-    <canvas id="wheel" width="300" height="300"></canvas>  <!-- ← КЛЮЧЕВОЕ ИЗМЕНЕНИЕ -->
+    <!-- ⚠ Размер должен совпадать с контейнером -->
+    <canvas id="wheel" width="220" height="220"></canvas>
   </div>
 
   <div class="buttons">
