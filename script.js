@@ -1,10 +1,11 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
   let spinning = false;
-  let betColor = null; // Хранит выбранную ставку
+  let betColor = null;
 
   const resultScreen = document.getElementById("result");
   const resultText = document.getElementById("result-text");
 
+  // 🎡 Создаем колесо из внешнего файла
   const theWheel = new Winwheel({
     canvasId: 'wheel',
     outerRadius: 100,
@@ -12,23 +13,15 @@
     textFillStyle: 'white',
     lineWidth: 2,
     strokeStyle: 'gold',
+    segments: wheelSegments, // берем сегменты из wheel-config.js
     animation: {
       type: 'spinToStop',
       duration: 4,
       spins: 8,
       callbackFinished: onSpinEnd
-    },
-    segments: [
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' },
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' },
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' },
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' }
-    ]
+    }
   });
+
   theWheel.draw();
 
   function resetWheel() {
