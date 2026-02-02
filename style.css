@@ -91,7 +91,6 @@ body {
   height: 100%;
   border-radius: 50%;
   border: 6px solid gold;
-
   background: conic-gradient(
     red 0deg 45deg,
     black 45deg 90deg,
@@ -102,6 +101,11 @@ body {
     red 270deg 315deg,
     black 315deg 360deg
   );
+
+  /* ВАЖНО для вращения */
+  transform-origin: 50% 50%;
+  transition: transform 2.8s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+}
 
   transition: transform 2.8s cubic-bezier(0.17, 0.67, 0.12, 0.99);
 }

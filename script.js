@@ -3,6 +3,7 @@
   if (tg) tg.expand();
 
   let spinning = false;
+  let currentRotation = 0; // чтобы колесо продолжало крутиться от текущего положения
 
   window.spin = function(color) {
     if (spinning) return;
@@ -15,8 +16,10 @@
       return;
     }
 
-    // случайный угол
-    const rotation = 360 * 5 + Math.floor(Math.random() * 360);
+    // случайный угол (прибавляем к текущему)
+    const rotation = currentRotation + 360 * 5 + Math.floor(Math.random() * 360);
+    currentRotation = rotation; // сохраняем текущее положение
+
     wheel.style.transform = rotate(${rotation}deg);
 
     setTimeout(() => {
@@ -25,8 +28,8 @@
       // Для теста без Telegram
       alert(`Вы выбрали ${color}. ${win ? "WIN 💰" : "LOSE ❌"}`);
 
-      // Если в Telegram Web App:
-      // if (tg) tg.sendData(JSON.stringify({ game: "roulette", color: color, win }));
+      // Если Web App Telegram:
+      // if (tg) tg.sendData(JSON.stringify({ game: "roulette", color, win }));
 
       spinning = false;
     }, 2800);
