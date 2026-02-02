@@ -12,33 +12,33 @@
   const resultText = document.getElementById("result-text");
 
   // 🎡 СОЗДАЁМ КОЛЕСО
-  theWheel = new Winwheel({
-    canvasId: 'wheel',
-    outerRadius: 100,
-    textFontSize: 16,
-    textFillStyle: 'white',
-    animation: {
-      type: 'spinToStop',
-      duration: 4,
-      spins: 8,
-      callbackFinished: onSpinEnd
-    },
-    pins: {
-      number: 24,
-      fillStyle: 'silver',
-      outerRadius: 4
-    },
-    segments: [
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' },
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' },
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' },
-      { fillStyle: '#ff0000', text: 'Красный' },
-      { fillStyle: '#000000', text: 'Чёрный' }
-    ]
-  });
+theWheel = new Winwheel({
+  canvasId: 'wheel',
+  outerRadius: 100,
+  textFontSize: 14,
+  textFillStyle: 'white',
+  lineWidth: 2,
+  strokeStyle: 'gold',
+  animation: {
+    type: 'spinToStop',
+    duration: 4,
+    spins: 8,
+    callbackFinished: onSpinEnd
+  },
+  segments: [
+    { fillStyle: '#ff0000', text: 'Красный' },
+    { fillStyle: '#000000', text: 'Чёрный' },
+    { fillStyle: '#ff0000', text: 'Красный' },
+    { fillStyle: '#000000', text: 'Чёрный' },
+    { fillStyle: '#ff0000', text: 'Красный' },
+    { fillStyle: '#000000', text: 'Чёрный' },
+    { fillStyle: '#ff0000', text: 'Красный' },
+    { fillStyle: '#000000', text: 'Чёрный' }
+  ]
+});
+
+// 🔥 ВАЖНО — ДОрисовать колесо
+theWheel.draw();
 
   // 🔄 СБРОС КОЛЕСА
   function resetWheel() {
