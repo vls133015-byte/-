@@ -11,36 +11,42 @@
   const resultText = document.getElementById("result-text");
   const betValue = document.getElementById("bet-value");
 
-  // сектора: по порядку как в CSS
-  const sectors = [
-    "red", "black", "red", "black",
-    "red", "black", "red", "black"
-  ];
+  const btnRed = document.getElementById("btn-red");
+  const btnBlack = document.getElementById("btn-black");
+
+  const betButtons = document.querySelectorAll(".bet-panel button");
+
+  // порядок секторов как в CSS
+  const sectors = ["red","black","red","black","red","black","red","black"];
   const sectorAngle = 360 / sectors.length;
 
-  window.setBet = function(amount) {
-    currentBet = amount;
-    betValue.textContent = amount;
-  };
+  // выбор ставки
+  betButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentBet = Number(btn.textContent);
+      betValue.textContent = currentBet;
+    });
+  });
 
-  window.spin = function(chosenColor) {
+  btnRed.addEventListener("click", () => spin("red"));
+  btnBlack.addEventListener("click", () => spin("black"));
+
+  function spin(chosenColor) {
     if (spinning) return;
     spinning = true;
 
     resultScreen.style.display = "none";
 
-    const extraSpins = 360 * 5;
-    const randomAngle = Math.floor(Math.random() * 360);
-    const rotation = currentRotation + extraSpins + randomAngle;
-    currentRotation = rotation;
+    const rotation =
+      currentRotation + 360 * 5 + Math.floor(Math.random() * 360);
 
+    currentRotation = rotation;
     wheel.style.transform = rotate(${rotation}deg);
 
     setTimeout(() => {
-      // вычисляем сектор под стрелкой
-      const normalizedAngle = (360 - (rotation % 360)) % 360;
-      const sectorIndex = Math.floor(normalizedAngle / sectorAngle);
-      const resultColor = sectors[sectorIndex];
+      const normalized = (360 - (rotation % 360)) % 360;
+      const index = Math.floor(normalized / sectorAngle);
+      const resultColor = sectors[index];
 
       const win = resultColor === chosenColor;
 
@@ -59,10 +65,11 @@
       }
 
       spinning = false;
-    }, 2800);
-  };
+    }, 4000);
+  }
 
-  window.resetGame = function() {
-    resultScreen.style.display = "none";
-  };
+  document.getElementById("play-again")
+    .addEventListener("click", () => {
+      resultScreen.style.display = "none";
+    });
 });
