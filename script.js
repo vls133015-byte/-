@@ -1,65 +1,68 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
+  const tg = window.Telegram?.WebApp;
+  if (tg) tg.expand();
+
+  let spinning = false;
+  let currentRotation = 0;
+  let currentBet = 10;
+
   const wheel = document.getElementById("wheel");
   const resultScreen = document.getElementById("result");
   const resultText = document.getElementById("result-text");
+  const betValue = document.getElementById("bet-value");
 
-  let spinning = false;
-  let betColor = null;
+  // сектора: по порядку как в CSS
+  const sectors = [
+    "red", "black", "red", "black",
+    "red", "black", "red", "black"
+  ];
+  const sectorAngle = 360 / sectors.length;
 
-  function spinWheel() {
-    const randomDegree = Math.floor(Math.random() * 360);
-    wheel.style.transform = rotate(${randomDegree + 1440}deg); // 4 полных оборота + случайный угол
+  window.setBet = function(amount) {
+    currentBet = amount;
+    betValue.textContent = amount;
+  };
 
-    // Определяем цвет победителя
+  window.spin = function(chosenColor) {
+    if (spinning) return;
+    spinning = true;
+
+    resultScreen.style.display = "none";
+
+    const extraSpins = 360 * 5;
+    const randomAngle = Math.floor(Math.random() * 360);
+    const rotation = currentRotation + extraSpins + randomAngle;
+    currentRotation = rotation;
+
+    wheel.style.transform = rotate(${rotation}deg);
+
     setTimeout(() => {
-      spinning = false;
-      const normalized = randomDegree % 360;
-      const winningColor = (normalized >= 0 && normalized < 45) ||
-                           (normalized >= 90 && normalized < 135) ||
-                           (normalized >= 180 && normalized < 225) ||
-                           (normalized >= 270 && normalized < 315) ? 'red' : 'black';
+      // вычисляем сектор под стрелкой
+      const normalizedAngle = (360 - (rotation % 360)) % 360;
+      const sectorIndex = Math.floor(normalizedAngle / sectorAngle);
+      const resultColor = sectors[sectorIndex];
 
-      if (!betColor) {
-        resultText.textContent = Выпал ${winningColor.toUpperCase()};
-      } else if (betColor === winningColor) {
-        resultText.textContent = Выпал ${winningColor.toUpperCase()}! WIN 💰;
-        resultText.className = 'win';
-      } else {
-        resultText.textContent = Выпал ${winningColor.toUpperCase()}! LOSE ❌;
-        resultText.className = 'lose';
+      const win = resultColor === chosenColor;
+
+      resultText.textContent = win ? "WIN 💰" : "LOSE ❌";
+      resultText.className = win ? "win" : "lose";
+      resultScreen.style.display = "block";
+
+      if (tg) {
+        tg.sendData(JSON.stringify({
+          game: "roulette",
+          bet: currentBet,
+          chosenColor,
+          resultColor,
+          win
+        }));
       }
 
-      resultScreen.style.display = 'block';
-    }, 4200); // совпадает с transition 4s
-  }
+      spinning = false;
+    }, 2800);
+  };
 
-  function resetWheel() {
-    wheel.style.transition = 'none';
-    wheel.style.transform = 'rotate(0deg)';
-    void wheel.offsetWidth; // перезапуск transition
-    wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
-    spinning = false;
-    betColor = null;
-  }
-
-  document.getElementById("btn-red").addEventListener("click", () => {
-    if (spinning) return;
-    betColor = 'red';
-    spinning = true;
-    resultScreen.style.display = 'none';
-    spinWheel();
-  });
-
-  document.getElementById("btn-black").addEventListener("click", () => {
-    if (spinning) return;
-    betColor = 'black';
-    spinning = true;
-    resultScreen.style.display = 'none';
-    spinWheel();
-  });
-
-  document.getElementById("play-again").addEventListener("click", () => {
-    resultScreen.style.display = 'none';
-    resetWheel();
-  });
+  window.resetGame = function() {
+    resultScreen.style.display = "none";
+  };
 });
